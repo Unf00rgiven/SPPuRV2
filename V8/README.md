@@ -1,0 +1,109 @@
+@mainpage
+<h3>
+    Introduction
+</h3>
+
+<p>
+    Project Multi-tasking on ARM is adaptation of Multi-tasking evnironment for x86 based processors <br>
+    running under MS-DOS operating system, developed by prof. dr Miroslav Popović, for ARM processors. <br>
+    Adaptation is tested on Raspberry Pi 2, without host OS. Basic functionalities, like hardware setup <br>
+    and interrupt handling were implemented, since those are not provided by OS. <br>
+</p>
+
+<p>
+    Looking at the picture belowe, we can see system preparation and execution devided in few segments. <br>
+</p>
+
+<p>
+<img src="koncept.png">
+</p>
+
+<br>
+
+<p>
+    On the picture we see that power/reset of the Raspberry Pi is followed by a speceific boot process. <br>
+    After that, we have to initialize hardware and software, before executing Multi-tasking evnironment. <br>
+    Also, in order to communicate with the outside world, we have to use peripheral units. <br>
+</p>
+
+<h3>
+    Boot process
+</h3>
+
+<p>
+    The GPU is started on reset or power and its task is to load first FAT partition of the SD card. It <br>
+    searches for and loads file called bootcode.bin into memory and starts execution of that code. This code <br>
+    then searches the SD card for files called start.elf and config.txt. These files are used to set various <br>
+    kernel settings before GPU continues to search for kernel.img file, which contains OS code. This file <br>
+    is then loaded into memory at a specific address (0x8000) and the execution is transfered to ARM CPU. <br>
+</p>
+
+<h3>
+    Processor configuration
+</h3>
+
+<p>
+    After boot process is completed, we have to configure the processor itself. Since there are situations <br>
+    when processor starts in Hypervisor mode, we have to change it to Supervisor right away, so further execution <br>
+    and switching to System mode (when executing kernel) dont have problems. When this is done, we have <br>
+    to set up the Interrupt vector table, and stack areas for System stack, as well as stacks for Interrupt <br>
+    handlers (timer and software). This is all done in assembly. <br>
+</p>
+
+<h3>
+    Kernel configuration
+</h3>
+
+<p>
+    When processor configuration is completed, we continue initialization of other components. Since we are switching to <br>
+    C code now, BSS initialization is done first. After BSS, we initialize peripheral uints like AUX, GPIO and others. <br>
+    Timer is the one set up next because it is one of the key components for realising Multi-tasking. All this <br>
+    configurations have to be done while interrupts are disabled, to prevent interrupts from happening. Memory heap is <br>
+    initialized next because standard C library is replaced with some lightweight functionalities. Now, all peripheral <br>
+    units and memory are initialized, and the final step is to initialize Multi-tasking evnironment and start it. <br>
+</p>
+
+<h3>
+    Kernel execution
+</h3>
+
+<p>
+    Although kernel execution starts while initialization still takes place, because it is considered a task, real testing <br>
+    examples start here. First, one main task is created to log system progress via AUX. This task then creates two more tasks <br>
+    of same priority, which will be executed "simultaneously". These tasks are calculating factoriel and sum of numbers, while <br>
+    simulating heavy workload while busy waiting. Both tasks are logging their progress via AUX, and their logs will be interleaved <br>
+    because of timer interrupts and task switching.
+</p>
+
+<h3>
+    Peripheral modules
+</h3>
+
+<p>
+    There are 6 different modules:
+    <ul>
+        <li>Timer module - provides access to ARM timer.</li>
+        <li>MINI AUX module - provides access to Raspberry's mini UART. Also it provides simple functions to <br>
+        send and receive data.</li>
+        <li>GPIO module - provides access to GPIO pins on Raspberry. Also it provides simple function <br>
+        to set/reset pins.</li>
+        <li>Interrupt module - provides access and configuration for Raspberry's interrupt controller. Also this <br>
+        module is connected to low level interrupt handlers. </li>
+        <li>System timer module - provides access to Raspberry's system timer.</li>
+        <li>UART module - provides access to Raspberry's UART.</li>
+    </ul>
+    Timer and interrupt module are used to set up timer driven interrupts, MINI AUX is used for logging, and <br>
+    System timer is used for busy waiting.
+</p>
+
+<h3>
+    Interrupt handlers
+</h3>
+
+<p>
+    Handling both interrupt types (software and timer) work the same way. When interrupt occurs, execution is transfered <br>
+    to low-level interrupt handlers via Interrupt vector table. These low-level interrupt handlers are implemented <br>
+    in assembly, and their job is to save current processor's context and to pass it to high-level interrupt handlers defined <br>
+    in kernel. When high-level handlers finish, low-level handler returns context to processor. <br>
+</p>
+

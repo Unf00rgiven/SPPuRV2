@@ -1,0 +1,4 @@
+Program se ne terminise uvek tacno za 5s, ima priblizno 0.1-0.3s delay.
+
+Moze biti iz vise razloga, pretpostavljam da i virtuelna masina na kojoj koristim ubuntu utice na ponovljivost rezultata.
+Min. 5 puta se poziva funkcija DecBrojac koja koristi i druge resurse tipa mutex gde se gubi vreme, sve u svemu blago iznad one 1s koju smo mi definisali.

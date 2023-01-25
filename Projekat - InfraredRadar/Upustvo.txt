@@ -1,0 +1,66 @@
+
+Poštovane kolege,
+
+Projektni zadatak je planiran da se radi naredne 4 nedelje vežbi.
+	Projekat ukupno nosi 40 bodova,
+	i u poslednjem terminu će se održati odbrana projektnog zadatka
+	uživo u prostorijama zgrade NTP-a.
+
+U prilogu vam šaljem postavku vašeg projektnog zadatka.
+	Arhiva se sastoji od sledećih datoteka:
+
+	dokumentacija.doc - primer dokumentacije i šablon iste.
+	Broadcom-BC2835-datasheet.pdf - sadrži sve detalje vezane za
+		periferije dostupne na Raspberry Pi 2 uređaju
+		(adrese, registri, načini korišćenja, ostali detalji)
+	Raspberry-Pi-GPIO-Layout-Model-B-Plus.png u kojoj se mogu videti
+		dostupni prolazi izvedeni na konektoru Raspberry Pi 2 uređaja.
+	zadatak.docx- postavka vašeg projektnog zadatka
+	Ostali fajlovi su uglavnom dokumentacije vaših senzora/aktuatora.
+
+
+Odbrana projektnog zadatka sastoji se iz 3 kontrolne tačke i finalne odbrane:
+	KT1 [5 bodova] - Vaš konkretan zadatak u ovom delu je da pripremite
+		koncept i arhitekturu rešenja.
+		Nema implementacije još uvek,
+		potrebno je opisati problem,
+		kako planirate da ga rešite.
+		Iskoristite priloženi šablon dokumentacija.doc
+		kao primer dokumentacije za projektni zadatak
+		i popunite polja zaključno sa konceptom rešenja.
+		Odbrana KT1 je u terminu vežbi 17. 12.
+	
+	KT2 [5 bodova] - U ovom delu potrebno je prikazati
+		da je deo rešenja odrađen.
+		Potrebno je prikazati implementiran rukovalac
+		i pokretanje komandi iz terminala kako bi pokazali valjanost rešenja.
+		Odbrana KT2 je u terminu vežbi 24. 12.
+	
+	KT3 [5 bodova] - U ovom delu implementacija bi
+		trebalo da je do 90% završena.
+		Potrebno je prikazati rukovalac i testnu aplikaciju,
+		koja ima barem osnovnu funkcionalnost
+		(testirati sa eksperimentalnim vrednostima po izboru).
+		Odbrana KT3 je u terminu vežbi 14. 01.
+
+	Odbrana [25 bodova] - Odbrana projektnog zadatka sastoji se iz
+		predavanja popunjene dokumentacija sa svim poglavljima
+		(Uvod, Analiza problema, Koncept rešenja,
+		Opis rešenja (Programsko rešenje), Testiranje i Zaključak).
+		Kompletna funkcionalnost se ocekuje da je postignuta pre odbrane.
+		Termin odbrane projektnog zadatka održaće se
+		u prostorijama zgrade NTP-a u nedelji od 17.01 - 21.01.
+
+Termini odbrana KT se sastoje od toga da predstavnici grupa podele ekran
+i prezentuju šta je urađeno za potrebe pomenutih KT.
+Svaka grupa ima 20 min vremena za prikazivanje urađenog.
+Nakon prezentovanja, postaviću vam nekoliko pitanja
+i to će biti kraj odbrane KT.
+
+Što se opreme tiče (senzora, konektora),
+preuzimanje opreme biće organizovano u petak 15. 12
+u terminu koji najviše bude odgovarao vašoj grupi.
+
+Za sva dodatna pitanja koja su specifična za vaš projektni zadatak,
+zamolio bih da mi pišete u MS Teams.
+Srdačan pozdrav i srećno sa izradom projekta!
